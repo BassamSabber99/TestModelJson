@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"> </script>
+
+<head>
+  <script>
+    async function loadModel() {
+      model = undefined;
+      model = await tf.loadLayersModel("");
+      console.log("model loaded")
+    }
+    loadModel();
+
+    function make_prediction() {
+      var a, b, output;
+      a = Number(document.getElementById("first").value);
+      b = Number(document.getElementById("second").value);
+      input_xs = tf.tensor2d([
+        [a, b]
+      ]);
+      output = model.predict(input_xs);
+      const outputData = output.dataSync();
+      document.getElementById("answer").value = Number(outputData[0] > 0.5);
+    }
+  </script>
+</head>
+
+<body>
+  <center>
+    <p>Test </p>
+    <br>
+  </center>
+  <center>Enter string : <input id="first"></center>
+  <br> <br>
+  <center><button onclick="make_prediction()">Make  Prediction</button></center>
+  <br> <br>
+  <center><input id="answer"></center>
+  <br> <br>
+</body>
+
+</html>
