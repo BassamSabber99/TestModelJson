@@ -7,7 +7,9 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
 
-
+from dotenv import load_dotenv
+dotenv_path = 'environment.env'  # Path to .env file
+load_dotenv(dotenv_path)
 
 app = Flask(__name__)
 CORS(app)
